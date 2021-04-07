@@ -26,3 +26,11 @@ Toy project javascript
     </body>
 </html>
 ```
+
+## feature list : 필요한 기능들 나열 
+  - display list
+  - add
+  - remove
+  - edit
+  - check/uncheck for done 
+ 
