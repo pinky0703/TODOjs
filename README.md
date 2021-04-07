@@ -4,6 +4,7 @@ Toy project javascript
 ## using 
   - bootstrap 5.*
   - jQuery 3.5.1
+  - DB : localStorage 
 ```html
 <html>
     <head>
