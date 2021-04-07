@@ -3,7 +3,7 @@ Toy project javascript
 
 ## using 
   - bootstrap 5.*
-  - jQuery 
+  - jQuery 3.5.1
 ```html
 <html>
     <head>
