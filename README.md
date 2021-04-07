@@ -28,7 +28,7 @@ Toy project javascript
 ```
 
 ## feature list : 필요한 기능들 나열 
-  - display list
+  - display list [#2](https://github.com/pinky0703/TODOjs/issues/1#issue-852282652)
   - add
   - remove
   - edit
