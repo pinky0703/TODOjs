@@ -4,3 +4,6 @@
 .selected{
     color:gray;
 }
+.todo-flex{
+    flex-grow: 1;
+}
