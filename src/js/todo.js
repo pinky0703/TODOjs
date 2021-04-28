@@ -10,23 +10,29 @@ var db = new DBHelper("todoList");
 
 
   
-  function addListItem(item){
+  function addListItem(item, uiUpdate){
 
-    let checkedStr = item.isDone ? ' checked="checked"' : '';
-
-    // $('#todoInput').prepend('<li class="list-group-item" data-id="' + item.id + '">' +
-    // '<input class="form-check-input me-1" type="checkbox" value="" aria-label="">'+
-    // todoText +
-    // '</li>'); // 랜덤으로 가져온 id를 여기다 넣어준다  
+    let checkedStr = item.isDone ? ' checked ' : '';
 
     $('#todoList').append(`<li class="list-group-item" data-id="${item.id}">
-    <input class="form-check-input me-1 todoCheck" type="checkbox" value="" ${checkedStr}>
-    <button type="button" class="btn btn-outline-danger btn-sm todo-del-btn">X</button>
-    ${item.text}</li>`); 
-
+    <div class="input-group">
+        <div>
+            <input class="form-check form-switch" type="checkbox" value="" ${checkedStr}>
+        </div>
+        <span class="todoText">${item.text}</span>
+        <input type="text" class="form-control form-control-sm" />
+        <button type="button" class="btn btn-outline-danger btn-sm todo-del-btn"><i class="fas fa-minus-circle"></i></button>
+    </div>
+    </li>`); 
+    
 
 }
+function addEvent(){
 
+    addTodo($('#todoInput').val());
+    $('#todoInput').val('');
+
+}
 function listUp(){
 
   db.get().forEach(item=>{
@@ -40,18 +46,23 @@ function listUp(){
  * 할일 추가
  * @param {String} todoText 
  */
-function addTodo(todoText){
+function addTodo(){
     // 위에부터 추가 prepend
     // 아래에 추가 append
     // json item 
-    let item = {
-        'id': getTodoId(),
-        'text' : todoText,
-        'isDone' : false //  완료 됐는지 안됐는지 ? 
+    todoText = $('#todoInput').val();
+    if( todoText != ''){
+        todoText.val(''); 
+        let item = {
+            'id': getTodoId(),
+            'text' : todoText,
+            'isDone' : false //  완료 됐는지 안됐는지 ? 
+        }
+        db.addItem(item);
     }
-    // list에 추가 
-    addListItem(item); // UI 표시 
-    db.addItem(item); 
+
+    // 이거추가 
+  
 }
 var isDigit = function(str){
     try{
@@ -62,13 +73,18 @@ var isDigit = function(str){
     }
    
 }
+var uiUpdate = function () { // 가상 벌츄어 돔 
+    $('#todoList').html('');
+    db.get().forEach(item=>addListItem(item));
+}
 $(document).ready(function(){
     $('#todoInput').keydown(function(e){
         if(e.keyCode === 13){
-            addTodo($(this).val());
-            $(this).val('');
+            addTodo();
         }
     });
+    // $('#todoInput').keydown(e => if(e === 13){ addTodo()}});
+    $('.todo-list-add-btn').click(addTodo);
 
     $(this).on('change','.todoCheck',function(e){
         // data-id 갖고오는 법 ? 
@@ -82,14 +98,15 @@ $(document).ready(function(){
     $(this).on('click','.todo-del-btn',function(e){
         let itemId = $(this).parent().data('id');
         db.removeItem(itemId);
+        $(this).parent().remove(); 
        
     });
     
     $(this).on('click','.todo-list-add-btn',function(e){
-        
-        addTodo($('#todoInput').val());
+        addTodo();
     });
 
     // loadTodoList();    
-    listUp();
+    // listUp();
+    uiUpdate();
 });

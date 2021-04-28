@@ -1,10 +1,11 @@
 class DBHelper{
     #dataList = [];
     #KEY = '';
-    constructor(KEY){
+    constructor(KEY, uiCallback){
         this.#KEY = KEY;
         let strTodo = localStorage.getItem(this.#KEY); 
         this.#dataList = (strTodo === null) ? []:  JSON.parse(strTodo);
+        this.uiCallback = uiCallback;
     }
     
     /**
@@ -36,7 +37,6 @@ class DBHelper{
      * @param {boolean} isChecked 
      */
     updateIsDone(itemId, isChecked){
-        
         this.#dataList.filter(f=>f.id==itemId).forEach(it => it.isDone = isChecked);
         this.save();
         // 회색으로 바꿔주는거 
@@ -49,7 +49,6 @@ class DBHelper{
      */
     removeItem(itemId){
         this.#dataList = this.#dataList.filter(f=>f.id !== itemId); 
-        $(this).parent().remove(); 
         this.save();
     }
 }
