@@ -33,5 +33,5 @@ Toy project javascript
   - add [#1](https://github.com/pinky0703/TODOjs/issues/7)
   - remove [#2]()
   - edit
-  - check/uncheck for done 
+  - check/uncheck for done [#4]()
  
