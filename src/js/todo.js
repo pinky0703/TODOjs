@@ -1,5 +1,6 @@
 
-var db = new DBHelper("todoList",uiUpdate);
+var db = new MySqlHelper("",uiUpdate);
+
 
 function addListItem(item){
     let checkedStr = item.isDone ? ' checked' : '';
@@ -12,10 +13,10 @@ function addListItem(item){
             <div>
                 <input class="form-check form-switch todo-flex" type="checkbox" ${checkedStr}>
             </div>
-            <span class="todoText"> ${item.text} </span>
+            <span class="todoText" style="padding-left: 10px;"> ${item.text} </span>
             
             <input type="text" class="todoTextInput form-control form-control-sm d-none" />
-            <button type="button" class="btn btn-outline-danger btn-sm todo-del-btn"><i class="fas fa-minus-circle"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm todo-del-btn" style="padding-left: 10px;"><i class="fas fa-minus-circle"></i></button>
         </div>
     </li>`);
 }
@@ -37,7 +38,7 @@ function addTodo(){
         'text'  : todoText,
         'isDone': false
     }
-    //list에 display
+    // db에 추가 
     addListItem(item);
     db.addItem(item);
 }
