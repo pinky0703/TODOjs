@@ -2,9 +2,11 @@
 Toy project javascript
 
 ## using 
+### ver.1
   - bootstrap 5.*
   - jQuery 3.5.1
   - DB : localStorage 
+
 ```html
 <html>
     <head>
@@ -34,4 +36,27 @@ Toy project javascript
   - remove [#2]()
   - edit
   - check/uncheck for done [#4]()
+ 
+# TODOjs ver.2
+### ver.2 [2021.08]
+  - FE : Apache
+  - BE : Spring boot 
+  - DB : MySql
+  - 테스트 : Postman 
+  
+## Using File list 
+### [ JS ] todo.js 
+주로 JS 이벤트 처리 
+- [ ] addListItem
+- [ ] uiUpdate
+- [ ] getCurrentId 
+- [ ] 기타 이벤트들(click, blur, change, ...)
+
+### [ JS ] mySqlHelper.js
+DB에 직접 접근하여 처리 / ajax로 데이터 보냄 
+- [ ] get() : get 방식으로 데이터 전송 
+- [ ] addItem()
+- [ ] updateItem()
+- [ ] removeItem()
+- [ ] save()
  
