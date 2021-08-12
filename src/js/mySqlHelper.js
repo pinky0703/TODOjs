@@ -52,7 +52,7 @@ class MySqlHelper{
         // insert 
         var parent = this; // ***
         $.ajax({
-            url: this.apiUrl + '/api/add',
+            url: this.apiUrl + '/api/add', // proxy 를 쓰면 this.apiUrl 빼고 그냥 쓸 수 있음 
             async: true, // 리턴하는게 없으니까 비동기 
             type:'POST', // GET, PUT
             data: item,
@@ -63,7 +63,7 @@ class MySqlHelper{
                 parent.uiCallback(); // 바로 업데이트 
             },
             error: function(jqXHR) {
-                alert(jqXHR); // 
+                alert(jqXHR);
             },
     
 
@@ -73,41 +73,16 @@ class MySqlHelper{
 
     /**
      * itemId 에 해당하는 item 의 완료체크 업데이트 
-     * @param {string} itemId 
+     * @param {string} item 
      * @param {boolean} isDone
      */
-    updateIsDone(itemId, isDone){
-        var parent = this;
+    updateItem(item){
         var parent = this;
         var settings = { // 호출하는것만 쓴다
-            url: 'http://localhost:8989/api/update/' + itemId,
+            url: this.apiUrl + '/api/update' + item,
             type: "POST",
+            data : item,
             timeout: 0
-        };
-
-        // 위에께 다 실행되면 아래께 실행 
-        $.ajax(settings).done(function(response){
-            console.log();       
-            if('SUCCESS' == response){
-                parent.uiCallback();
-            }else{
-                alert(response);
-            }
-        });
-    }
-    /**
-     * itemId 에 해당하는 item 의 완료체크 업데이트 
-     */
-    updateText(itemId, editText){
-        var parent = this;
-        var settings = { // 호출하는것만 쓴다
-            url: 'http://localhost:8989/api/update/' + itemId,
-            type: "POST",
-            timeout: 0,
-            data: {
-                id : itemId,
-                text : editText
-            }
         };
 
         // 위에께 다 실행되면 아래께 실행 
@@ -126,14 +101,15 @@ class MySqlHelper{
      * @param {string} itemId 
      */
     removeItem(itemId){
-        var parent = this; // ***
+        var parent = this; 
         var settings = { // 호출하는것만 쓴다
-            url: 'http://localhost:8989/api/delete/' + itemId,
+            url: this.apiUrl + '/api/delete/' + itemId,
             type: "POST",
-            timeout: 0
+            timeout: 0, // 서버 기다리는 시간 
+            data:{}
         };
 
-        // 위에께 다 실행되면 아래께 실행 
+        // 위에께 다 실행되면 아래것 실행 
         $.ajax(settings).done(function(response){
             console.log();       
             if('SUCCESS' == response){
